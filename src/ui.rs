@@ -1322,7 +1322,7 @@ where
             snarl_resp.context_menu(|ui| {
                 let menu_pos = from_global * ui.cursor().min;
 
-                viewer.show_graph_menu(menu_pos, ui, snarl);
+                viewer.show_graph_menu(menu_pos, snarl_state.selected_nodes(), ui, snarl);
             });
         }
     }
@@ -1892,7 +1892,14 @@ where
 
     if viewer.has_node_menu(&snarl.nodes[node.0].value) {
         r.context_menu(|ui| {
-            viewer.show_node_menu(node, &inputs, &outputs, ui, snarl);
+            viewer.show_node_menu(
+                node,
+                &inputs,
+                &outputs,
+                snarl_state.selected_nodes(),
+                ui,
+                snarl,
+            );
         });
     }
 
